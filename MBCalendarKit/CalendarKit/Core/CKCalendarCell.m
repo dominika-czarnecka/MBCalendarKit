@@ -32,12 +32,12 @@
         
         //  Normal Cell Colors
         _normalBackgroundColor = [UIColor clearColor];
-        _selectedBackgroundColor = [UIColor clearColor];
-        _inactiveSelectedBackgroundColor = [UIColor clearColor];
+        _selectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sDots"]];
+        _inactiveSelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sDots"]];
         
         //  Today Cell Colors
-        _todayBackgroundColor = [UIColor clearColor];
-        _todaySelectedBackgroundColor = [UIColor clearColor];
+        _todayBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
+        _todaySelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sDots"]];
         _todayTextShadowColor = [UIColor clearColor];
         _todayTextColor = [UIColor whiteColor];
         
@@ -69,6 +69,7 @@
     self = [self init];
     if (self) {
         _size = size;
+        [self.layer setCornerRadius:size.width / 2];
     }
     return self;
 }

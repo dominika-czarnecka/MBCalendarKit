@@ -38,7 +38,7 @@ float degToRad(float deg){
         _scalingFactor = scale;
         _rotation = rotation;
         _isDeleted = NO;
-        _fillColor = kCalendarColorHeaderMonth;
+        _fillColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00];
         [self setOpaque:NO];
     }
     
