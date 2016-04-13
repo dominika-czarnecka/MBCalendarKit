@@ -32,13 +32,13 @@
         
         //  Normal Cell Colors
         _normalBackgroundColor = [UIColor clearColor];
-        _selectedBackgroundColor = kCalendarColorBlue;
+        _selectedBackgroundColor = [UIColor clearColor];
         _inactiveSelectedBackgroundColor = [UIColor clearColor];
         
         //  Today Cell Colors
-        _todayBackgroundColor = kCalendarColorBluishGray;
-        _todaySelectedBackgroundColor = kCalendarColorBlue;
-        _todayTextShadowColor = kCalendarColorTodayShadowBlue;
+        _todayBackgroundColor = [UIColor clearColor];
+        _todaySelectedBackgroundColor = [UIColor clearColor];
+        _todayTextShadowColor = [UIColor clearColor];
         _todayTextColor = [UIColor whiteColor];
         
         //  Text Colors
@@ -182,7 +182,7 @@
 - (void)applyColorsForState:(CKCalendarMonthCellState)state
 {
     //  Default colors and shadows
-    [[self label] setTextColor:[self textColor]];
+    [[self label] setTextColor:[[self dot] isHidden] ? [self textColor] : [UIColor blackColor]];
     [[self label] setShadowColor:[self textShadowColor]];
     [[self label] setShadowOffset:CGSizeMake(0, 0.5)];
     
@@ -195,7 +195,7 @@
     {
         [self setBackgroundColor:[self todaySelectedBackgroundColor]];
         [[self label] setShadowColor:[self todayTextShadowColor]];
-        [[self label] setTextColor:[self todayTextColor]];
+        [[self label] setTextColor:[[self dot] isHidden] ? [self todayTextColor] : [UIColor blackColor]];
         [self setBorderColor:[self backgroundColor]];
     }
     
@@ -204,7 +204,7 @@
     {
         [self setBackgroundColor:[self todayBackgroundColor]];
         [[self label] setShadowColor:[self todayTextShadowColor]];
-        [[self label] setTextColor:[self todayTextColor]];
+        [[self label] setTextColor:[[self dot] isHidden] ? [self todayTextColor] : [UIColor blackColor]];
         [self setBorderColor:[self backgroundColor]];
         [self showBorder];
     }
@@ -214,7 +214,7 @@
     {
         [self setBackgroundColor:[self selectedBackgroundColor]];
         [self setBorderColor:[self selectedCellBorderColor]];
-        [[self label] setTextColor:[self textSelectedColor]];
+        [[self label] setTextColor:[[self dot] isHidden] ? [self textSelectedColor] : [UIColor blackColor]];
         [[self label] setShadowColor:[self textSelectedShadowColor]];
         [[self label] setShadowOffset:CGSizeMake(0, -0.5)];
     }
@@ -236,7 +236,7 @@
     }
     
     //  Make the dot follow the label's style
-    [[self dot] setBackgroundColor:[[self label] textColor]];
+    [[self dot] setBackgroundColor:[UIColor whiteColor]];
     [[self dot] setAlpha:[[self label] alpha]];
 }
 
