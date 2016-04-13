@@ -42,7 +42,7 @@
         _todayTextColor = [UIColor whiteColor];
         
         //  Text Colors
-        _textColor = kCalendarColorLightTextGradient;
+        _textColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00];
         _textShadowColor = [UIColor clearColor];
         _textSelectedColor = [UIColor whiteColor];
         _textSelectedShadowColor = [UIColor clearColor];
@@ -160,11 +160,13 @@
 - (void)configureDot
 {
     UIView *dot = [self dot];
+    
     CGFloat selfWidth = [self frame].size.width -10;
     
     [[dot layer] setCornerRadius:selfWidth /2];
     CGRect dotFrame = CGRectMake(5, 5, selfWidth, selfWidth);
     [[self dot] setFrame:dotFrame];
+    [[self dot] setBackgroundColor:[UIColor whiteColor]];
     
 }
 

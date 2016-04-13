@@ -40,13 +40,13 @@
     if (self) {
         
         _headerMonthTextFont = [UIFont boldSystemFontOfSize:22];
-        _headerMonthTextColor = kCalendarColorHeaderMonth;
-        _headerMonthTextShadow = kCalendarColorHeaderMonthShadow;
+        _headerMonthTextColor = [UIColor whiteColor];
+        _headerMonthTextShadow = [UIColor clearColor];
         _headerWeekdayTitleFont = [UIFont boldSystemFontOfSize:10];
-        _headerWeekdayTitleColor = kCalendarColorHeaderWeekdayTitle;
-        _headerWeekdayShadowColor = kCalendarColorHeaderWeekdayShadow;
-        _headerGradient = kCalendarColorHeaderGradientDark;
-        _headerTitleHighlightedTextColor = kCalendarColorHeaderTitleHighlightedBlue;
+        _headerWeekdayTitleColor = [UIColor whiteColor];
+        _headerWeekdayShadowColor = [UIColor clearColor];
+        _headerGradient = [UIColor clearColor];
+        _headerTitleHighlightedTextColor = [UIColor whiteColor];
         
         _monthTitle = [UILabel new];
         [_monthTitle setTextColor:_headerMonthTextColor];
