@@ -90,8 +90,8 @@
     [self configureLabel];
     [self configureDot];
     
-    [self addSubview:[self label]];
     [self addSubview:[self dot]];
+    [self addSubview:[self label]];
 }
 
 #pragma mark - Setters
@@ -160,14 +160,10 @@
 - (void)configureDot
 {
     UIView *dot = [self dot];
+    CGFloat selfWidth = [self frame].size.width -10;
     
-    CGFloat dotRadius = 3;
-    CGFloat selfHeight = [self frame].size.height;
-    CGFloat selfWidth = [self frame].size.width;
-    
-    [[dot layer] setCornerRadius:dotRadius/2];
-    
-    CGRect dotFrame = CGRectMake(selfWidth/2 - dotRadius/2, (selfHeight - (selfHeight/5)) - dotRadius/2, dotRadius, dotRadius);
+    [[dot layer] setCornerRadius:selfWidth /2];
+    CGRect dotFrame = CGRectMake(5, 5, selfWidth, selfWidth);
     [[self dot] setFrame:dotFrame];
     
 }
