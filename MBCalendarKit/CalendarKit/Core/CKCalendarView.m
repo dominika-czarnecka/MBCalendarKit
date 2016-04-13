@@ -70,6 +70,7 @@
     
     //  Accessory Table
     _table = [UITableView new];
+    [_table setBackgroundColor:[UIColor clearColor]];
     [_table setDelegate:self];
     [_table setDataSource:self];
     
@@ -1038,7 +1039,8 @@
     if (count == 0) {
         UITableViewCell *cell = [[self table] dequeueReusableCellWithIdentifier:@"noDataCell"];
         [[cell textLabel] setTextAlignment:NSTextAlignmentCenter];
-        [[cell textLabel] setTextColor:[UIColor colorWithWhite:0.2 alpha:0.8]];
+        [[cell textLabel] setTextColor:[UIColor colorWithWhite:1.0 alpha:1]];
+        [cell setBackgroundColor:[UIColor clearColor]];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         if ([indexPath row] == 1) {
@@ -1053,11 +1055,22 @@
 
     CKTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
     CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
     
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
     [[cell textLabel] setText:[event title]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSDate *date = [event date];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@ - ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00]}];
+    
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event title] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    
+    [[cell textLabel] setAttributedText:attr];
     
     UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(3, 6, 20, 20)];
     CALayer *layer = [CALayer layer];
