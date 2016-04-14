@@ -1062,13 +1062,14 @@
     [[cell textLabel] setText:[event title]];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd:MM"];
+    [dateFormatter setDateFormat:@"dd.MM"];
     NSDate *date = [event date];
     NSString *dateString = [dateFormatter stringFromDate:date];
     
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@ - ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00]}];
     
     [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event title] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event info] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}]];
     
     [[cell textLabel] setAttributedText:attr];
     
