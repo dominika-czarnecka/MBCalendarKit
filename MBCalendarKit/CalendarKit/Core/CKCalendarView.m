@@ -1066,10 +1066,10 @@
     NSDate *date = [event date];
     NSString *dateString = [dateFormatter stringFromDate:date];
     
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@ - ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@    ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
     
     [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event title] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}]];
-    [attr appendAttributedString:[[NSAttributedString alloc] initWithString: @"\n\t" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString: @"\n\r" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
     [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event info] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
     
     [[cell textLabel] setAttributedText:attr];

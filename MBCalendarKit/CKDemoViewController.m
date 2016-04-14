@@ -40,14 +40,16 @@
      */
     
     //  An event for the new MBCalendarKit release.
-    NSString *title = NSLocalizedString(@"Release MBCalendarKit 2.2.4", @"");
-    NSDate *date = [NSDate dateWithDay:28 month:11 year:2014];
-    CKCalendarEvent *releaseUpdatedCalendarKit = [CKCalendarEvent eventWithTitle:title andDate:date andInfo:nil];
+    NSString *title = @"Wystawa";
+    NSDate *date = [NSDate dateWithDay:28 month:04 year:2016];
+    NSString *info = NSLocalizedString(@"Release MBCalendarKit 2.2.4", @"");
+    CKCalendarEvent *releaseUpdatedCalendarKit = [CKCalendarEvent eventWithTitle:title andDate:date andInfo:info];
     
     //  An event for the new Hunger Games movie.
-    NSString *title2 = NSLocalizedString(@"The Hunger Games: Mockingjay, Part 1", @"");
-    NSDate *date2 = [NSDate dateWithDay:21 month:11 year:2014];
-    CKCalendarEvent *mockingJay = [CKCalendarEvent eventWithTitle:title2 andDate:date2 andInfo:nil];
+    NSString *title2 = @"Wydarzenie";
+    NSDate *date2 = [NSDate dateWithDay:21 month:04 year:2016];
+    NSString *info2 = NSLocalizedString(@"The Hunger Games: Mockingjay, Part 1", @"");
+    CKCalendarEvent *mockingJay = [CKCalendarEvent eventWithTitle:title2 andDate:date2 andInfo:info2];
 
     //  Integrate MBCalendarKit
     NSString *integrationTitle = NSLocalizedString(@"Integrate MBCalendarKit", @"");
@@ -55,9 +57,9 @@
     CKCalendarEvent *integrationEvent = [CKCalendarEvent eventWithTitle:integrationTitle andDate:integrationDate andInfo:nil];
     
     //  An event for the new MBCalendarKit release.
-    NSString *title3 = NSLocalizedString(@"Fix bug where events don't show up immediately.", @"");
-    NSDate *date3 = [NSDate dateWithDay:29 month:11 year:2014];
-    CKCalendarEvent *fixBug = [CKCalendarEvent eventWithTitle:title3 andDate:date3 andInfo:nil];
+//    NSString *title3 = NSLocalizedString(@"Fix bug where events don't show up immediately.", @"");
+//    NSDate *date3 = [NSDate dateWithDay:29 month:11 year:2014];
+//    CKCalendarEvent *fixBug = [CKCalendarEvent eventWithTitle:title3 andDate:date3 andInfo:nil];
     
     
     /**
@@ -68,7 +70,7 @@
     
     self.data[date] = @[releaseUpdatedCalendarKit];
     self.data[date2] = @[mockingJay, integrationEvent];
-    self.data[date3] = @[fixBug];
+//    self.data[date3] = @[fixBug];
 }
 
 - (void)viewDidAppear:(BOOL)animated
