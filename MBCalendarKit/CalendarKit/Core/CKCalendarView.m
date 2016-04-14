@@ -1066,10 +1066,11 @@
     NSDate *date = [event date];
     NSString *dateString = [dateFormatter stringFromDate:date];
     
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@ - ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00]}];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@ - ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
     
-    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event title] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
-    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event info] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}]];
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event title] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}]];
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString: @"\n\t" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event info] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
     
     [[cell textLabel] setAttributedText:attr];
     
@@ -1273,9 +1274,7 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *t = [touches anyObject];
-    
     CGPoint p = [t locationInView:self];
-    
     [self pointInside:p withEvent:event];
 }
 
@@ -1298,7 +1297,6 @@
                 index = [cell index];
                 break;
             }
-
         }
         
         //  Clip the index to minimum and maximum dates
