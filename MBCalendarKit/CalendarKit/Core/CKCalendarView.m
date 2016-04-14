@@ -1069,8 +1069,9 @@
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@    ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
     
     [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event title] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}]];
-    [attr appendAttributedString:[[NSAttributedString alloc] initWithString: @"\n\r" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
-    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event info] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+//    [attr appendAttributedString:[[NSAttributedString alloc] initWithString: @"\n\r" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"\n\r%@    ",[event info]] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    [cell textLabel].numberOfLines = 0;
     
     [[cell textLabel] setAttributedText:attr];
     
