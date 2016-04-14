@@ -13,13 +13,13 @@
 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSDictionary *info;
+@property (nonatomic, strong) NSString *info;
 @property (nonatomic, strong) UIColor *color;
 
 @property NSData* image;
 
-+(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSDictionary *)info;
-+(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSDictionary *)info andColor:(UIColor *)color;
-+(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSDictionary *)info andImage:(NSData *)image;
++(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSString *)info;
++(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSString *)info andColor:(UIColor *)color;
++(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSString *)info andImage:(NSData *)image;
 
 @end

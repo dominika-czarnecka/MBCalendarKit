@@ -10,7 +10,7 @@
 
 @implementation CKCalendarEvent
 
-+(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSDictionary *)info
++(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSString *)info
 {
     CKCalendarEvent *event = [CKCalendarEvent new];
     [event setTitle:title];
@@ -20,7 +20,7 @@
     return event;
 }
 
-+(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSDictionary *)info andColor:(UIColor *)color
++(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSString *)info andColor:(UIColor *)color
 {
     CKCalendarEvent *event = [CKCalendarEvent new];
     [event setTitle:title];
@@ -31,7 +31,7 @@
     return event;
 }
 
-+(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSDictionary *)info andImage:(NSData *)image
++(CKCalendarEvent *)eventWithTitle:(NSString *)title andDate:(NSDate *)date andInfo:(NSString *)info andImage:(NSData *)image
 {
     CKCalendarEvent *event = [CKCalendarEvent new];
     [event setTitle:title];

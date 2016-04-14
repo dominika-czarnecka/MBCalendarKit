@@ -1062,7 +1062,7 @@
     [[cell textLabel] setText:[event title]];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
+    [dateFormatter setDateFormat:@"dd:MM"];
     NSDate *date = [event date];
     NSString *dateString = [dateFormatter stringFromDate:date];
     

@@ -16,7 +16,6 @@
 }
 
 @property (nonatomic, strong) UILabel *label;
-
 @property (nonatomic, strong) UIView *dot;
 
 @end
@@ -42,7 +41,7 @@
         _todayTextColor = [UIColor whiteColor];
         
         //  Text Colors
-        _textColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00];
+        _textColor = [UIColor whiteColor];
         _textShadowColor = [UIColor clearColor];
         _textSelectedColor = [UIColor whiteColor];
         _textSelectedShadowColor = [UIColor clearColor];
