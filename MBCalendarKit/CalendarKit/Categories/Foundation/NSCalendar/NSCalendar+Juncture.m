@@ -22,7 +22,7 @@
 
 - (NSDate *)firstDayOfTheWeekUsingReferenceDate:(NSDate *)date
 {
-    return [self firstDayOfTheWeekUsingReferenceDate:date andStartDay:1];
+    return [self firstDayOfTheWeekUsingReferenceDate:date andStartDay: 2];
 }
 
 /**
@@ -36,7 +36,7 @@
 
 - (NSDate *)firstDayOfTheWeekUsingReferenceDate:(NSDate *)date andStartDay:(NSInteger)day
 {
-    NSInteger weekday = [self weekdayInDate:date]-day;
+    NSInteger weekday = [self weekdayInDate:date] + 5;
     return [self dateBySubtractingDays:weekday fromDate:date];
 }
 
