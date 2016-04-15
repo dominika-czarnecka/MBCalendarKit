@@ -1054,8 +1054,9 @@
     }
 
     CKTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
+
     [cell setBackgroundColor:[UIColor clearColor]];
+    [cell sizeToFit];
     
     CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
     
@@ -1066,14 +1067,46 @@
     NSDate *date = [event date];
     NSString *dateString = [dateFormatter stringFromDate:date];
     
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@    ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
-    
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@   ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+  
     [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event title] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}]];
-//    [attr appendAttributedString:[[NSAttributedString alloc] initWithString: @"\n\r" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
-    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"\n\r%@    ",[event info]] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
-    [cell textLabel].numberOfLines = 0;
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"\n\r%@",[event info]] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
     
+    CGSize labelSize = [[cell textLabel].text sizeWithFont:[UIFont systemFontOfSize:13]];
+    
+    CGRect Rect = [cell textLabel].frame;
+    
+    Rect.size.width = labelSize.width;
+    //You will get the width as per the text in label
+    
+    [cell textLabel].frame = Rect;
+    
+    /* Now, let's change the frame for the second label */
+//    CGRect secondLabelRect;
+//    
+//    CGFloat x = firstLabelRect.origin.x;
+//    CGFloat y = firstLabelRect.origin.y;
+//    
+//    x = x + labelSize.width + 20; //There are some changes here.
+//    
+//    secondLabelRect = secondLabel.frame;
+//    secondLabelRect.origin.x = x;
+//    secondLabelRect.origin.y = y; 
+//    
+//    secondLabel.frame = secondLabelRect;
+    
+    CGSize maximumLabelSize = CGSizeMake(296,9999);
+    //TODO - dwie linie
+    [cell textLabel].numberOfLines = 0;
+    [cell textLabel].lineBreakMode = UILineBreakModeWordWrap;
+    [[cell textLabel] sizeToFit];
     [[cell textLabel] setAttributedText:attr];
+    CGSize expectedLabelSize = [attr.string sizeWithFont:[cell textLabel].font constrainedToSize:maximumLabelSize lineBreakMode:[cell textLabel].lineBreakMode];
+    
+    //adjust the label the the new height.
+    CGRect newFrame = [cell textLabel].frame;
+    newFrame.size.height = expectedLabelSize.height;
+    [cell textLabel].frame = newFrame;
     
     UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(3, 6, 20, 20)];
     CALayer *layer = [CALayer layer];
@@ -1088,7 +1121,6 @@
     else {
         cell.imageView.image = nil;
     }
-    
     [cell addSubview:colorView];
     
     return cell;
@@ -1145,7 +1177,7 @@
     {
         NSDate *firstOfTheMonth = [[self calendar] firstDayOfTheMonthUsingReferenceDate:[self date]];
         
-        NSDate *firstVisible = [[self calendar] firstDayOfTheWeekUsingReferenceDate:firstOfTheMonth andStartDay:self.calendar.firstWeekday];
+        NSDate *firstVisible = [[self calendar] firstDayOfTheWeekUsingReferenceDate: firstOfTheMonth andStartDay:self.calendar.firstWeekday];
         
         return firstVisible;
     }
@@ -1323,7 +1355,6 @@
             {
                 [cell setDeselected];
             }
-            
         }
     }
     
