@@ -31,12 +31,12 @@
         
         //  Normal Cell Colors
         _normalBackgroundColor = [UIColor clearColor];
-        _selectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sDots"]];
-        _inactiveSelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sDots"]];
+        _selectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
+        _inactiveSelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
         
         //  Today Cell Colors
         _todayBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
-        _todaySelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sDots"]];
+        _todaySelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
         _todayTextShadowColor = [UIColor clearColor];
         _todayTextColor = [UIColor whiteColor];
         
