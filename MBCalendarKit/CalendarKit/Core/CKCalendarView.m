@@ -1033,14 +1033,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
-    
-    CGRect frame = [[event title] boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, CGFLOAT_MAX)
+   // CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
+    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    CGRect frame = [[cell textLabel].text boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, CGFLOAT_MAX)
                                       options:NSStringDrawingUsesLineFragmentOrigin
                                    attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:[UIFont systemFontSize]+2]}
                                       context:nil];
     
-    return [event title].length > 0 ? frame.size.height+30 : 44;
+    return [cell textLabel].text.length > 0 ? frame.size.height+30 : 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1073,7 +1073,7 @@
     
     CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
     
-    [[cell textLabel] setText:[event title]];
+   [[cell textLabel] setText:[event title]];
     
     [[cell textLabel] setFont:[UIFont systemFontOfSize:[UIFont systemFontSize]+2]];
     [[cell textLabel] setNumberOfLines:0];
@@ -1084,46 +1084,13 @@
     NSDate *date = [event date];
     NSString *dateString = [dateFormatter stringFromDate:date];
     
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@   ",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"%@\t",dateString] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
   
     [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[event title] attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}]];
-    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"\n\r%@",[event info]] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
-    
-    CGSize labelSize = [[cell textLabel].text sizeWithFont:[UIFont systemFontOfSize:13]];
-    
-    CGRect Rect = [cell textLabel].frame;
-    
-    Rect.size.width = labelSize.width;
-    //You will get the width as per the text in label
-    
-    [cell textLabel].frame = Rect;
-    
-    /* Now, let's change the frame for the second label */
-//    CGRect secondLabelRect;
-//    
-//    CGFloat x = firstLabelRect.origin.x;
-//    CGFloat y = firstLabelRect.origin.y;
-//    
-//    x = x + labelSize.width + 20; //There are some changes here.
-//    
-//    secondLabelRect = secondLabel.frame;
-//    secondLabelRect.origin.x = x;
-//    secondLabelRect.origin.y = y; 
-//    
-//    secondLabel.frame = secondLabelRect;
-    
-    CGSize maximumLabelSize = CGSizeMake(296,9999);
-    //TODO - dwie linie
-    [cell textLabel].numberOfLines = 0;
-    [cell textLabel].lineBreakMode = UILineBreakModeWordWrap;
-    [[cell textLabel] sizeToFit];
-    [[cell textLabel] setAttributedText:attr];
-    CGSize expectedLabelSize = [attr.string sizeWithFont:[cell textLabel].font constrainedToSize:maximumLabelSize lineBreakMode:[cell textLabel].lineBreakMode];
-    
-    //adjust the label the the new height.
-    CGRect newFrame = [cell textLabel].frame;
-    newFrame.size.height = expectedLabelSize.height;
-    [cell textLabel].frame = newFrame;
+    if ([event info]){
+    [attr appendAttributedString:[[NSAttributedString alloc] initWithString:[[NSString alloc] initWithFormat:@"\n\t\t%@",[event info]] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    }
+        [[cell textLabel] setAttributedText:attr];
     
     UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(3, 6, 20, 20)];
     CALayer *layer = [CALayer layer];
