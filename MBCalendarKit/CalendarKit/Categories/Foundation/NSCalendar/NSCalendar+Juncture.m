@@ -65,7 +65,7 @@
 {
     NSDateComponents *c = [self components:NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
     
-    [c setDay:0];
+    [c setDay:1];
     
     return [self dateFromComponents:c];
 }

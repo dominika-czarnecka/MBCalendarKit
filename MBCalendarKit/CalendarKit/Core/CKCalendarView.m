@@ -55,7 +55,7 @@
     _locale = [NSLocale currentLocale];
     _calendar = [NSCalendar autoupdatingCurrentCalendar];
     [_calendar setLocale:_locale];
-    _timeZone = [NSTimeZone localTimeZone];
+    _timeZone = nil;
     _date = [NSDate date];
     
     NSDateComponents *components = [_calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:_date];
@@ -1032,17 +1032,6 @@
     return count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
-    
-    CGRect frame = [[event title] boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, CGFLOAT_MAX)
-                                      options:NSStringDrawingUsesLineFragmentOrigin
-                                   attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:[UIFont systemFontSize]+2]}
-                                      context:nil];
-    
-    return [event title].length > 0 ? frame.size.height+30 : 44;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger count = [[self events] count];
@@ -1060,8 +1049,6 @@
         else
         {
             [[cell textLabel] setText:@""];
-            
-            
         }
         return cell;
     }
@@ -1074,10 +1061,6 @@
     CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
     
     [[cell textLabel] setText:[event title]];
-    
-    [[cell textLabel] setFont:[UIFont systemFontOfSize:[UIFont systemFontSize]+2]];
-    [[cell textLabel] setNumberOfLines:0];
-    [[cell textLabel] setLineBreakMode:NSLineBreakByWordWrapping];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd.MM"];
