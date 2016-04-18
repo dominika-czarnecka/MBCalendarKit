@@ -40,6 +40,7 @@
      */
     
     //  An event for the new MBCalendarKit release.
+<<<<<<< HEAD
     NSString *title = @"Wystawa";
     NSDate *date = [NSDate dateWithDay:28 month:04 year:2016];
     NSString *info = NSLocalizedString(@"Release MBCalendarKit 2.2.4", @"");
@@ -50,6 +51,16 @@
     NSDate *date2 = [NSDate dateWithDay:21 month:04 year:2016];
     NSString *info2 = NSLocalizedString(@"The Hunger Games: Mockingjay, Part 1", @"");
     CKCalendarEvent *mockingJay = [CKCalendarEvent eventWithTitle:title2 andDate:date2 andInfo:info2];
+=======
+    NSString *title = NSLocalizedString(@"Release MBCalendarKit 2.2.4", @"");
+    NSDate *date = [NSDate dateWithDay:28 month:4 year:2016];
+    CKCalendarEvent *releaseUpdatedCalendarKit = [CKCalendarEvent eventWithTitle:title andDate:date andInfo:nil];
+    
+    //  An event for the new Hunger Games movie.
+    NSString *title2 = NSLocalizedString(@"The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1The Hunger Games: Mockingjay, Part 1", @"");
+    NSDate *date2 = [NSDate dateWithDay:21 month:4 year:2016];
+    CKCalendarEvent *mockingJay = [CKCalendarEvent eventWithTitle:title2 andDate:date2 andInfo:nil];
+>>>>>>> origin/fixed-by-Maciej
 
     //  Integrate MBCalendarKit
     NSString *integrationTitle = NSLocalizedString(@"Integrate MBCalendarKit", @"");
