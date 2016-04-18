@@ -30,9 +30,9 @@
         _state = CKCalendarMonthCellStateNormal;
         
         //  Normal Cell Colors
-        _normalBackgroundColor = [UIColor clearColor];
-        _selectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
-        _inactiveSelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
+//        _normalBackgroundColor = [UIColor clearColor];
+//        _selectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
+//        _inactiveSelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
         
         //  Today Cell Colors
         _todayBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
