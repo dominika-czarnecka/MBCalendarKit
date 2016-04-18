@@ -1033,14 +1033,19 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-   // CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    CGRect frame = [[cell textLabel].text boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, CGFLOAT_MAX)
+    CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
+
+    CGRect frame1 = [[event title] boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, CGFLOAT_MAX)
                                       options:NSStringDrawingUsesLineFragmentOrigin
                                    attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:[UIFont systemFontSize]+2]}
                                       context:nil];
     
-    return [cell textLabel].text.length > 0 ? frame.size.height+30 : 44;
+    CGRect frame2 = [[event info] boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, CGFLOAT_MAX)
+                                                options:NSStringDrawingUsesLineFragmentOrigin
+                                             attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:[UIFont systemFontSize]+2]}
+                                                context:nil];
+    
+    return [event title].length > 0 ? frame1.size.height+frame2.size.height+30 : 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1060,8 +1065,6 @@
         else
         {
             [[cell textLabel] setText:@""];
-            
-            
         }
         return cell;
     }
