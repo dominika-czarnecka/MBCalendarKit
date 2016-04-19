@@ -155,7 +155,7 @@
             }]].mutableCopy;
         }
         
-        [self setEvents:sortedArray];
+        ([sortedArray count] != 0) ? [self setEvents:sortedArray] : [self setEvents:[[self dataSource] calendarView:self eventsForDate:[self date]]];
         
 //        NSArray *sortedArray =[[[self dataSource] calendarView:self eventsForDate:[self date]] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
 //                            NSDate *d1 = [obj1 date];
