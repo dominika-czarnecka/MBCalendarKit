@@ -8,8 +8,16 @@
 
 #import "CKCalendarCell.h"
 #import "CKCalendarCellColors.h"
-
+#import <sys/utsname.h>
 #import "UIView+Border.h"
+
+
+#define IS_IPHONE4 ([[UIScreen mainScreen] bounds].size.width == 480 || [[UIScreen mainScreen] bounds].size.height == 480)
+#define IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.width == 568 || [[UIScreen mainScreen] bounds].size.height == 568)
+#define IS_IPAD    ([[UIScreen mainScreen] bounds].size.width == 768 || [[UIScreen mainScreen] bounds].size.height == 768)
+#define IS_IPHONE6 ([[UIScreen mainScreen] bounds].size.width == 667 || [[UIScreen mainScreen] bounds].size.height == 667)
+#define IS_IPHONE6PLUS ([[UIScreen mainScreen] bounds].size.width == 736 || [[UIScreen mainScreen] bounds].size.height == 736)
+
 
 @interface CKCalendarCell (){
     CGSize _size;
@@ -31,12 +39,23 @@
         
         //  Normal Cell Colors
         _normalBackgroundColor = [UIColor clearColor];
-        _selectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Dots"]];
-        _inactiveSelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Dots"]];
+        _selectedBackgroundColor = [UIColor clearColor];
+        _inactiveSelectedBackgroundColor = [UIColor clearColor];
         
-        //  Today Cell Colors
-        _todayBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
-        _todaySelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
+        //  Today Cell Color Image by device
+        if (IS_IPHONE4 || IS_IPHONE5){
+                _todayBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots2"]];
+                _todaySelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots2"]];
+        }
+        if(IS_IPHONE6){
+            _todayBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
+            _todaySelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots"]];
+        }
+        if(IS_IPHONE6PLUS){
+            _todayBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots3"]];
+            _todaySelectedBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dots3"]];
+        }
+        
         _todayTextShadowColor = [UIColor clearColor];
         _todayTextColor = [UIColor whiteColor];
         
@@ -281,5 +300,4 @@
 {
     [self setState:CKCalendarMonthCellStateOutOfRange];
 }
-
 @end

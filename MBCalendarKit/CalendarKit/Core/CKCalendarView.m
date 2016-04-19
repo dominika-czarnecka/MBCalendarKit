@@ -143,12 +143,23 @@
      */
     
     if ([[self dataSource] respondsToSelector:@selector(calendarView:eventsForDate:)]) {
-        NSArray *sortedArray = [[[self dataSource] calendarView:self eventsForDate:[self date]] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            NSDate *d1 = [obj1 date];
-            NSDate *d2 = [obj2 date];
+//        NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
+//        NSLog(@"%lu",(unsigned long)[self calendar].daysPerMonth);
+//        for(int i=0; i< [self calendar].daysPerMonth; i++){
+//            sortedArray = [sortedArray arrayByAddingObjectsFromArray:[[[self dataSource] calendarView:self eventsForDate:[self date]] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//                NSDate *d1 = [obj1 date];
+//                NSDate *d2 = [obj2 date];
+//                
+//                return [d1 compare:d2];
+//            }]].mutableCopy;
+//        }
+        
+        NSArray *sortedArray =[[[self dataSource] calendarView:self eventsForDate:[self date]] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                            NSDate *d1 = [obj1 date];
+                            NSDate *d2 = [obj2 date];
             
-            return [d1 compare:d2];
-        }];
+                            return [d1 compare:d2];
+                        }];
         
         [self setEvents:sortedArray];
     }
