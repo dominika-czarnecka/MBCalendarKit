@@ -475,6 +475,19 @@
             
             if([[self dataSource] respondsToSelector:@selector(calendarView:eventsForDate:)])
             {
+                NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
+                
+                for(int i=0; i< [self calendar].daysPerMonth; i++){
+                    sortedArray = [sortedArray arrayByAddingObjectsFromArray:[[[self dataSource] calendarView:self eventsForDate:[[self date] dateByAddingTimeInterval:60*60*24*i]] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                        NSDate *d1 = [obj1 date];
+                        NSDate *d2 = [obj2 date];
+                        
+                        return [d1 compare:d2];
+                    }]].mutableCopy;
+                }
+                
+                ([sortedArray count] != 0) ? [self setEvents:sortedArray] : [self setEvents:[[self dataSource] calendarView:self eventsForDate:[self date]]];
+                
                 BOOL showDot = ([[[self dataSource] calendarView:self eventsForDate:workingDate] count] > 0);
                 [cell setShowDot:showDot];
             }

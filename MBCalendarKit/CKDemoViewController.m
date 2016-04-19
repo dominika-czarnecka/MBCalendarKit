@@ -48,7 +48,7 @@
     //  An event for the new Hunger Games movie.
     NSString *title2 = @"Wydarzenie";
     NSDate *date2 = [NSDate dateWithDay:21 month:04 year:2016];
-    NSString *info2 = NSLocalizedString(@"The Hunger Games: Mockingjay, Part 1", @"");
+    NSString *info2 = NSLocalizedString(@"The Hunger Games", @"");
     CKCalendarEvent *mockingJay = [CKCalendarEvent eventWithTitle:title2 andDate:date2 andInfo:info2];
 
     //  Integrate MBCalendarKit
