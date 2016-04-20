@@ -10,4 +10,6 @@
 
 @interface CKTableViewCell : UITableViewCell
 
+@property (nonatomic, retain) UILabel *sublabel;
+
 @end

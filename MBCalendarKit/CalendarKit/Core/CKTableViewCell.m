@@ -16,5 +16,18 @@
     //Moves cell text label over to make space for color square on left
     //self.textLabel.frame = CGRectMake(35, 0, 260, 20);
 }
+//
+//-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+//    if(!self){
+//        self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+//        
+//    }
+//    
+//    [self setBackgroundColor:[UIColor redColor]];
+//
+//    return self;
+//
+//}
+
 
 @end

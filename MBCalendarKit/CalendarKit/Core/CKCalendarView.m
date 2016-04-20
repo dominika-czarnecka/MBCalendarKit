@@ -74,7 +74,7 @@
     [_table setDelegate:self];
     [_table setDataSource:self];
     
-    [_table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [_table registerClass:[CKTableViewCell class] forCellReuseIdentifier:@"cell"];
     [_table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"noDataCell"];
     
     //  Events for selected date
@@ -1110,7 +1110,7 @@
 
     CKTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
-    [cell setBackgroundColor:[UIColor clearColor]];
+//    [cell setBackgroundColor:[UIColor clearColor]];
     [cell sizeToFit];
     
     CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
