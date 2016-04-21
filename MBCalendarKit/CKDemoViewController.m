@@ -64,7 +64,6 @@
     
     /**
      *  Add the events to the data source.
-     *
      *  The key is the date that the array of events appears on.
      */
     
@@ -107,12 +106,11 @@
 // Called before/after the selected date changes
 - (void)calendarView:(CKCalendarView *)CalendarView willSelectDate:(NSDate *)date
 {
-    
+    //if( [CalendarView displayMode] != CKCalendarViewModeMonth) [CalendarView setDisplayMode:CKCalendarViewModeMonth];
 }
 
 - (void)calendarView:(CKCalendarView *)CalendarView didSelectDate:(NSDate *)date
 {
-    
 }
 
 //  A row is selected in the events table. (Use to push a detail view or whatever.)

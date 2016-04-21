@@ -21,6 +21,10 @@
 
 @interface CKCalendarView () <CKCalendarHeaderViewDataSource, CKCalendarHeaderViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSUInteger _firstWeekDay;
+    //To see if it was tapped forward or back
+    NSInteger tapped;
+    //To see if there were a daymode
+    NSInteger daymode;
 }
 
 @property (nonatomic, strong) NSMutableSet* spareCells;
@@ -57,7 +61,8 @@
     [_calendar setLocale:_locale];
     _timeZone = [NSTimeZone localTimeZone];
     _date = [NSDate date];
-    
+    tapped = 0;
+    daymode = 0;
     NSDateComponents *components = [_calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:_date];
     _date = [_calendar dateFromComponents:components];
     
@@ -67,16 +72,15 @@
     _selectedIndex = [_calendar daysFromDate:[self _firstVisibleDateForDisplayMode:_displayMode] toDate:_date];
     _headerView = [CKCalendarHeaderView new];
     
-    
     //  Accessory Table
     _table = [UITableView new];
     [_table setBackgroundColor:[UIColor clearColor]];
     [_table setDelegate:self];
     [_table setDataSource:self];
     
-    [_table registerClass:[CKTableViewCell class] forCellReuseIdentifier:@"cell"];
+     [_table registerClass:[CKTableViewCell class] forCellReuseIdentifier:@"cell"];
+    //[_table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     [_table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"noDataCell"];
-    
     //  Events for selected date
     _events = [NSMutableArray new];
     
@@ -156,20 +160,9 @@
         }
         
         ([sortedArray count] != 0) ? [self setEvents:sortedArray] : [self setEvents:[[self dataSource] calendarView:self eventsForDate:[self date]]];
-        
-//        NSArray *sortedArray =[[[self dataSource] calendarView:self eventsForDate:[self date]] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//                            NSDate *d1 = [obj1 date];
-//                            NSDate *d2 = [obj2 date];
-//            
-//                            return [d1 compare:d2];
-//                        }];
-        
-        
     }
     
-    /**
-     *  Call reloadData on the table.
-     */
+     // Call reloadData on the table.
     
     [[self table] reloadData];
     
@@ -714,11 +707,19 @@
     _date = date;
     
     if ([[self delegate] respondsToSelector:@selector(calendarView:didSelectDate:)]) {
+        if (tapped > 0){
+            [self setDisplayMode: CKCalendarViewModeMonth];
+            tapped--;
+        }else {
+            [self displayMode] != CKCalendarViewModeDay ? [self setDisplayMode: CKCalendarViewModeDay] : [self setDisplayMode: CKCalendarViewModeMonth];
+            daymode = 1;
+        }
         [[self delegate] calendarView:self didSelectDate:date];
     }
     
     if ([[self dataSource] respondsToSelector:@selector(calendarView:eventsForDate:)]) {
         
+        //[self setDisplayMode: CKCalendarViewModeDay];
         NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
         
         for(int i=0; i< [self calendar].daysPerMonth; i++){
@@ -730,7 +731,7 @@
             }]].mutableCopy;
         }
         ([sortedArray count] != 0) ? [self setEvents:sortedArray] : [self setEvents:[[self dataSource] calendarView:self eventsForDate:date]];
-       
+
         [[self table] reloadData];
     }
     
@@ -798,8 +799,6 @@
             [result appendString:@" - "];
             [result appendString:[lastVisibleDay monthAbbreviationAndYearOnCalendar:[self calendar]]];
         }
-        
-        
         return result;
     }
     
@@ -880,9 +879,11 @@
 
 - (void)forwardTapped
 {
+    tapped = 2;
     NSDate *date = [self date];
     NSDate *today = [NSDate date];
-
+    
+    //if([self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
     /* If the cells are animating, don't do anything or we'll break the view */
     
     if ([self isAnimating]) {
@@ -890,15 +891,12 @@
     }
     
     /*
-     
      Moving forward or backwards for month mode
      should select the first day of the month,
      unless the newly visible month contains
      [NSDate date], in which case we want to
      highlight that day instead.
-     
      */
-    
     
     if ([self displayMode] == CKCalendarViewModeMonth) {
         
@@ -912,9 +910,12 @@
         
         //  Otherwise, add a month and then go to the first of the month
         else{
-            date = [[self calendar] dateByAddingMonths:1 toDate:date];              //  Add a month
-            NSUInteger day = [[self calendar] daysInDate:date];                     //  Only then go to the first of the next month.
-            date = [[self calendar] dateBySubtractingDays:day-1 fromDate:date];
+            //if we were in day mode don't add
+            if(daymode ==0){
+                date = [[self calendar] dateByAddingMonths:1 toDate:date];              //  Add a month
+                NSUInteger day = [[self calendar] daysInDate:date];                     //  Only then go to the first of the next month.
+                date = [[self calendar] dateBySubtractingDays:day-1 fromDate:date];
+            }else daymode =0;
         }
         
         //  If today is in the visible month, jump to today
@@ -925,11 +926,9 @@
     }
     
     /*
-     
      For week mode, we move ahead by a week, then jump to
      the first day of the week. If the newly visible week
      contains today, we set today as the active date.
-     
      */
     
     else if([self displayMode] == CKCalendarViewModeWeek)
@@ -958,51 +957,49 @@
         date = [[self calendar] dateByAddingDays:1 toDate:date];
     }
     
+   // [self displayMode] != CKCalendarViewModeMonth ? [self setDisplayMode:CKCalendarViewModeMonth]: [self setDisplayMode:CKCalendarViewModeDay];
     //apply the new date
     [self setDate:date animated:YES];
 }
 
 - (void)backwardTapped
 {
-    
+    tapped = 2;
     NSDate *date = [self date];
     NSDate *today = [NSDate date];
-    
-    /* If the cells are animating, don't do anything or we'll break the view */
+    if( [self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
+        /* If the cells are animating, don't do anything or we'll break the view */
     
     if ([self isAnimating]) {
         return;
     }
     
     /*
-     
      Moving forward or backwards for month mode
      should select the first day of the month,
      unless the newly visible month contains
      [NSDate date], in which case we want to
      highlight that day instead.
-     
      */
     
     if ([self displayMode] == CKCalendarViewModeMonth) {
-        
-        date = [[self calendar] dateBySubtractingMonths:1 fromDate:date];       //  Subtract a month
-        NSUInteger day = [[self calendar] daysInDate:date];
-        date = [[self calendar] dateBySubtractingDays:day-1 fromDate:date];     //  Go to the first of the month
-        
-        //  If today is in the visible month, jump to today
-        if([[self calendar] date:date isSameMonthAs:[NSDate date]]){
-            NSUInteger distance = [[self calendar] daysFromDate:date toDate:today];
-            date = [[self calendar] dateByAddingDays:distance toDate:date];
-        }
+        //if we were in day mode don't substract
+        if(daymode ==0){
+            date = [[self calendar] dateBySubtractingMonths:1 fromDate:date];       //  Subtract a month
+            NSUInteger day = [[self calendar] daysInDate:date];
+            date = [[self calendar] dateBySubtractingDays:day-1 fromDate:date];     //  Go to the first of the month
+        }else daymode =0;
+            //  If today is in the visible month, jump to today
+            if([[self calendar] date:date isSameMonthAs:[NSDate date]]){
+                NSUInteger distance = [[self calendar] daysFromDate:date toDate:today];
+                date = [[self calendar] dateByAddingDays:distance toDate:date];
+            }
     }
     
     /*
-     
      For week mode, we move backward by a week, then jump
      to the first day of the week. If the newly visible
      week contains today, we set today as the active date.
-     
      */
     
     else if([self displayMode] == CKCalendarViewModeWeek)
@@ -1020,16 +1017,12 @@
         
     }
     
-    /*
-     
-     In day mode, simply move backward by one day.
-     
-     */
+     //In day mode, simply move backward by one day.
     
     else{
         date = [[self calendar] dateBySubtractingDays:1 fromDate:date];
     }
-    
+
     //apply the new date
     [self setDate:date animated:YES];
 }
@@ -1110,7 +1103,7 @@
 
     CKTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
-//    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor clearColor]];
     [cell sizeToFit];
     
     CKCalendarEvent *event = [[self events] objectAtIndex:[indexPath row]];
@@ -1154,7 +1147,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if ([[self events] count] == 0) {
         return;
     }

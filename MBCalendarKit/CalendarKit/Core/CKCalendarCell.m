@@ -265,7 +265,6 @@
 {
     
     CKCalendarMonthCellState state = [self state];
-    
     if (state == CKCalendarMonthCellStateInactive) {
         [self setState:CKCalendarMonthCellStateInactiveSelected];
     }

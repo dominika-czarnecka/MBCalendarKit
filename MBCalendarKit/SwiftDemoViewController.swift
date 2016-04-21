@@ -42,7 +42,7 @@ class SwiftDemoViewController: CKDemoViewController, CKCalendarViewDataSource{
         //
         
         let title : NSString = NSLocalizedString("Add Swift Demo", comment: "")
-        let date : NSDate = NSDate(day: 9, month: 1, year: 2015)
+        let date : NSDate = NSDate(day: 9, month: 05, year: 2015)
         let event : CKCalendarEvent = CKCalendarEvent(title: title as String, andDate: date, andInfo: nil)
         
         
@@ -51,8 +51,6 @@ class SwiftDemoViewController: CKDemoViewController, CKCalendarViewDataSource{
         //
         
         self.data[date] = [event]
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
