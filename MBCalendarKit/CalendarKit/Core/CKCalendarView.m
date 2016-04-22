@@ -233,7 +233,7 @@
     if(displayMode == CKCalendarViewModeDay)
     {
         //  Hide the cells entirely and only show the events table
-        rect = CGRectMake(0, 0, rect.size.width, cellSize.height);
+        rect = CGRectMake(cellSize.height, 0, rect.size.width, cellSize.height);
     }
     
     //  Show one row of days for week mode
@@ -719,7 +719,6 @@
     
     if ([[self dataSource] respondsToSelector:@selector(calendarView:eventsForDate:)]) {
         
-        //[self setDisplayMode: CKCalendarViewModeDay];
         NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
         
         for(int i=0; i< [self calendar].daysPerMonth; i++){
@@ -917,7 +916,6 @@
             
                 NSUInteger day = [[self calendar] daysInDate:date];                     //  Only then go to the first of the next month.
                 date = [[self calendar] dateBySubtractingDays:day-1 fromDate:date];
-            
         }
         
         //  If today is in the visible month, jump to today
@@ -939,7 +937,7 @@
         date = [[self calendar] dateByAddingWeeks:1 toDate:date];                   //  Add a week
         
         NSUInteger dayOfWeek = [[self calendar] weekdayInDate:date];
-        date = [[self calendar] dateBySubtractingDays:dayOfWeek-self.calendar.firstWeekday fromDate:date];   //  Jump to sunday
+        date = [[self calendar] dateBySubtractingDays:dayOfWeek-self.calendar.firstWeekday fromDate:date];   //  Jump to monday
         
         //  If today is in the visible week, jump to today
         if ([[self calendar] date:date isSameWeekAs:today]) {
@@ -949,12 +947,8 @@
         
     }
     
-    /*
-     
-     In day mode, simply move ahead by one day.
-     
-     */
-    
+    // In day mode, simply move ahead by one day.
+   
     else{
         date = [[self calendar] dateByAddingDays:1 toDate:date];
     }
