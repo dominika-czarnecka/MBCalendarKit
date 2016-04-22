@@ -78,9 +78,9 @@
     [_table setDelegate:self];
     [_table setDataSource:self];
     
-     [_table registerClass:[CKTableViewCell class] forCellReuseIdentifier:@"cell"];
-    //[_table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [_table registerClass:[CKTableViewCell class] forCellReuseIdentifier:@"cell"];
     [_table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"noDataCell"];
+    
     //  Events for selected date
     _events = [NSMutableArray new];
     
@@ -233,7 +233,7 @@
     if(displayMode == CKCalendarViewModeDay)
     {
         //  Hide the cells entirely and only show the events table
-        rect = CGRectMake(0, 0, rect.size.width, cellSize.height);
+        rect = CGRectMake([[self headerView] frame].size.height, 0, rect.size.width, cellSize.height);
     }
     
     //  Show one row of days for week mode
@@ -934,8 +934,7 @@
      */
     
     else if([self displayMode] == CKCalendarViewModeWeek)
-    {
-        
+    {        
         date = [[self calendar] dateByAddingWeeks:1 toDate:date];                   //  Add a week
         
         NSUInteger dayOfWeek = [[self calendar] weekdayInDate:date];
@@ -948,18 +947,12 @@
         }
         
     }
-    
-    /*
-     
-     In day mode, simply move ahead by one day.
-     
-     */
-    
+
+     //In day mode, simply move ahead by one day.
     else{
         date = [[self calendar] dateByAddingDays:1 toDate:date];
     }
-    
-   // [self displayMode] != CKCalendarViewModeMonth ? [self setDisplayMode:CKCalendarViewModeMonth]: [self setDisplayMode:CKCalendarViewModeDay];
+
     //apply the new date
     [self setDate:date animated:YES];
 }
