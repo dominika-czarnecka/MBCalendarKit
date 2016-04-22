@@ -196,7 +196,7 @@
         [cell removeFromSuperview];
     }
     
-    [[self headerView] removeFromSuperview];
+   // [[self headerView] removeFromSuperview];
     
     [super removeFromSuperview];
 }
