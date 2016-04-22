@@ -912,10 +912,12 @@
         else{
             //if we were in day mode don't add
             if(daymode ==0){
-                date = [[self calendar] dateByAddingMonths:1 toDate:date];              //  Add a month
+                date = [[self calendar] dateByAddingMonths:1 toDate:date];//  Add a month
+                }else daymode =0;
+            
                 NSUInteger day = [[self calendar] daysInDate:date];                     //  Only then go to the first of the next month.
                 date = [[self calendar] dateBySubtractingDays:day-1 fromDate:date];
-            }else daymode =0;
+            
         }
         
         //  If today is in the visible month, jump to today
@@ -964,7 +966,7 @@
 
 - (void)backwardTapped
 {
-    tapped = 2;
+    tapped = 1;
     NSDate *date = [self date];
     NSDate *today = [NSDate date];
     if( [self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
@@ -985,15 +987,16 @@
     if ([self displayMode] == CKCalendarViewModeMonth) {
         //if we were in day mode don't substract
         if(daymode ==0){
-            date = [[self calendar] dateBySubtractingMonths:1 fromDate:date];       //  Subtract a month
-            NSUInteger day = [[self calendar] daysInDate:date];
-            date = [[self calendar] dateBySubtractingDays:day-1 fromDate:date];     //  Go to the first of the month
+            date = [[self calendar] dateBySubtractingMonths:1 fromDate:date];   //  Subtract a month
         }else daymode =0;
-            //  If today is in the visible month, jump to today
-            if([[self calendar] date:date isSameMonthAs:[NSDate date]]){
-                NSUInteger distance = [[self calendar] daysFromDate:date toDate:today];
-                date = [[self calendar] dateByAddingDays:distance toDate:date];
-            }
+        NSUInteger day = [[self calendar] daysInDate:date];
+        date = [[self calendar] dateBySubtractingDays:day-1 fromDate:date];     //  Go to the first of the month
+        
+        //  If today is in the visible month, jump to today
+        if([[self calendar] date:date isSameMonthAs:[NSDate date]]){
+            NSUInteger distance = [[self calendar] daysFromDate:date toDate:today];
+            date = [[self calendar] dateByAddingDays:distance toDate:date];
+        }
     }
     
     /*
