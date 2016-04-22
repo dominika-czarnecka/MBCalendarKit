@@ -106,7 +106,6 @@
 // Called before/after the selected date changes
 - (void)calendarView:(CKCalendarView *)CalendarView willSelectDate:(NSDate *)date
 {
-    //if( [CalendarView displayMode] != CKCalendarViewModeMonth) [CalendarView setDisplayMode:CKCalendarViewModeMonth];
 }
 
 - (void)calendarView:(CKCalendarView *)CalendarView didSelectDate:(NSDate *)date

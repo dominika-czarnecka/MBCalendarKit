@@ -50,7 +50,7 @@
 @end
 
 @implementation CKCalendarView
-
+@dynamic delegate;
 #pragma mark - Initializers
 
 // Designated Initializer
