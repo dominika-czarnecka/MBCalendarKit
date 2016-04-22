@@ -16,6 +16,8 @@
 
 @property (nonatomic, assign) id<CKCalendarViewDataSource> dataSource;
 @property (nonatomic, assign) id<CKCalendarViewDelegate, UINavigationControllerDelegate> delegate;
+
 - (CKCalendarView *)calendarView;
+
 @end
 
