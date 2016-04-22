@@ -142,10 +142,8 @@
 
 - (void)reloadAnimated:(BOOL)animated
 {
-    /**
-     *  Sort the events.
-     */
-    
+     // Sort the events.
+
     if ([[self dataSource] respondsToSelector:@selector(calendarView:eventsForDate:)]) {
         
         NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
@@ -196,7 +194,7 @@
         [cell removeFromSuperview];
     }
     
-   // [[self headerView] removeFromSuperview];
+    [[self headerView] removeFromSuperview];
     
     [super removeFromSuperview];
 }
@@ -233,7 +231,6 @@
     if(displayMode == CKCalendarViewModeDay)
     {
         //  Hide the cells entirely and only show the events table
-//        rect = CGRectMake([[self headerView] frame].size.height+ [ ], 0, rect.size.width, cellSize.height);
         rect = CGRectMake(0,[[self headerView] frame].size.height, rect.size.width, cellSize.height);
 
     }
@@ -346,7 +343,7 @@
     
     if (self.displayMode == CKCalendarViewModeDay)
     {
-        tableFrame.origin.y = CGRectGetMaxY(self.headerView.frame);
+        tableFrame.origin.y =  80;//CGRectGetMaxY(self.headerView.frame);
     }
     
     tableFrame.size.height = CGRectGetHeight(self.superview.frame) - tableFrame.origin.y;
