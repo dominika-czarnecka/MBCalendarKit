@@ -343,7 +343,7 @@
     
     if (self.displayMode == CKCalendarViewModeDay)
     {
-        tableFrame.origin.y =  80;//CGRectGetMaxY(self.headerView.frame);
+        tableFrame.origin.y =  100;//CGRectGetMaxY(self.headerView.frame);
     }
     
     tableFrame.size.height = CGRectGetHeight(self.superview.frame) - tableFrame.origin.y;
