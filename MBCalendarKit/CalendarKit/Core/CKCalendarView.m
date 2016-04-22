@@ -233,7 +233,9 @@
     if(displayMode == CKCalendarViewModeDay)
     {
         //  Hide the cells entirely and only show the events table
-        rect = CGRectMake([[self headerView] frame].size.height, 0, rect.size.width, cellSize.height);
+//        rect = CGRectMake([[self headerView] frame].size.height+ [ ], 0, rect.size.width, cellSize.height);
+        rect = CGRectMake([[self headerView] frame].size.height+50, 0, rect.size.width, cellSize.height);
+
     }
     
     //  Show one row of days for week mode
