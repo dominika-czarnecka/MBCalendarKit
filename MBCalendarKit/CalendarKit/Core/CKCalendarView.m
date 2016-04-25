@@ -961,7 +961,7 @@
     tapped = 1;
     NSDate *date = [self date];
     NSDate *today = [NSDate date];
-  //  if( [self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
+    if( [self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
         /* If the cells are animating, don't do anything or we'll break the view */
     
     if ([self isAnimating]) {
