@@ -706,12 +706,13 @@
     _date = date;
     
     if ([[self delegate] respondsToSelector:@selector(calendarView:didSelectDate:)]) {
-        if (tapped > 0){
+        if (tapped == 0){
+              [self setDisplayMode: CKCalendarViewModeDay];
+            //([self displayMode] != CKCalendarViewModeDay) ? [self setDisplayMode: CKCalendarViewModeDay] : [self setDisplayMode: CKCalendarViewModeMonth];
+            daymode = 1;
+        }else {
             [self setDisplayMode: CKCalendarViewModeMonth];
             tapped--;
-        }else {
-            [self displayMode] != CKCalendarViewModeDay ? [self setDisplayMode: CKCalendarViewModeDay] : [self setDisplayMode: CKCalendarViewModeMonth];
-            daymode = 1;
         }
         [[self delegate] calendarView:self didSelectDate:date];
     }
@@ -882,7 +883,7 @@
     NSDate *date = [self date];
     NSDate *today = [NSDate date];
     
-    //if([self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
+    if([self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
     /* If the cells are animating, don't do anything or we'll break the view */
     
     if ([self isAnimating]) {

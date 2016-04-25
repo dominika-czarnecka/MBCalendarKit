@@ -125,10 +125,10 @@
 // Called after the selected date changes
 - (void)calendarView:(CKCalendarView *)calendarView didSelectDate:(NSDate *)date
 {
-    if ([self isEqual:[self delegate]]) {
-        [calendarView setDisplayMode:CKCalendarViewModeMonth];
-        return;
-    }
+//    if ([self isEqual:[self delegate]]) {
+//        [calendarView setDisplayMode:CKCalendarViewModeMonth];
+//        return;
+//    }
     
     if ([[self delegate] respondsToSelector:@selector(calendarView:didSelectDate:)]) {
         [[self delegate] calendarView:calendarView didSelectDate:date];
