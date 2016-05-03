@@ -706,16 +706,18 @@
     _date = date;
     
     if ([[self delegate] respondsToSelector:@selector(calendarView:didSelectDate:)]) {
-        if (tapped == 0){
-              [self setDisplayMode: CKCalendarViewModeDay];
-            //([self displayMode] != CKCalendarViewModeDay) ? [self setDisplayMode: CKCalendarViewModeDay] : [self setDisplayMode: CKCalendarViewModeMonth];
-            daymode = 1;
-        }else {
-            [self setDisplayMode: CKCalendarViewModeMonth];
-            tapped--;
-        }
-        [[self delegate] calendarView:self didSelectDate:date];
+               [[self delegate] calendarView:self didSelectDate:date];
     }
+    
+    if (tapped == 0){
+        [self setDisplayMode: CKCalendarViewModeDay];
+        //([self displayMode] != CKCalendarViewModeDay) ? [self setDisplayMode: CKCalendarViewModeDay] : [self setDisplayMode: CKCalendarViewModeMonth];
+        daymode = 1;
+    }else {
+        [self setDisplayMode: CKCalendarViewModeMonth];
+        tapped--;
+    }
+
     
     if ([[self dataSource] respondsToSelector:@selector(calendarView:eventsForDate:)]) {
         
@@ -959,7 +961,7 @@
 
 - (void)backwardTapped
 {
-    tapped = 1;
+    tapped = 2;
     NSDate *date = [self date];
     NSDate *today = [NSDate date];
     if( [self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
