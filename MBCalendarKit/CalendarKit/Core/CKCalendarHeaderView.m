@@ -39,7 +39,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        _headerMonthTextFont = [UIFont boldsys20Font];
+        _headerMonthTextFont = [UIFont boldSystemFontOfSize:22];
         _headerMonthTextColor = [UIColor whiteColor];
         _headerMonthTextShadow = [UIColor clearColor];
         _headerWeekdayTitleFont = [UIFont boldSystemFontOfSize:10];
