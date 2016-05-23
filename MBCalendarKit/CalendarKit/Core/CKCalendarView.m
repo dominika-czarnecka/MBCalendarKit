@@ -1068,12 +1068,12 @@
                                     {
                                         NSLog(@"Action to perform with Button 1");
                                     }];
-    button.backgroundColor = [UIColor greenColor]; //arbitrary color
+    button.backgroundColor = [UIColor clearColor];
     UITableViewRowAction *button2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Add" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                      {
                                          [self AddEventToCalendar:indexPath];
                                      }];
-    button2.backgroundColor = [UIColor blueColor]; //arbitrary color
+    button2.backgroundColor = [UIColor clearColor];
     
     return @[button, button2]; //array with all the buttons you want. 1,2,3, etc...
 }
@@ -1089,9 +1089,8 @@
             
             event.title = [[[self events] objectAtIndex:[indexPath row]] title];
             event.startDate = [[[self events] objectAtIndex:[indexPath row]] date];
+            event.endDate = [[[self events] objectAtIndex:[indexPath row]] date];
             event.allDay = YES;
-            // duration = 1 h
-//            event.endDate = [[[[self events] objectAtIndex:[indexPath row]] date] dateByAddingTimeInterval:90000];
             
             // set the calendar of the event. - here default calendar
             [event setCalendar:[eventStore defaultCalendarForNewEvents]];
