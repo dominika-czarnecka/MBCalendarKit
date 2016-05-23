@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <EventKit/EventKit.h>
 #import "CKCalendarViewModes.h"
 
 #import "CKCalendarEvent.h"

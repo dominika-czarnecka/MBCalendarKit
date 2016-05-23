@@ -19,6 +19,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+
 @interface CKCalendarView () <CKCalendarHeaderViewDataSource, CKCalendarHeaderViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSUInteger _firstWeekDay;
     //To see if it was tapped forward or back
@@ -1060,6 +1061,59 @@
     }
     
     return count;
+}
+
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *button = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"!" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        NSLog(@"Action to perform with Button 1");
+                                    }];
+    button.backgroundColor = [UIColor greenColor]; //arbitrary color
+    UITableViewRowAction *button2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Add" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                     {
+                                         [self AddEventToCalendar:indexPath];
+                                     }];
+    button2.backgroundColor = [UIColor blueColor]; //arbitrary color
+    
+    return @[button, button2]; //array with all the buttons you want. 1,2,3, etc...
+}
+
+- (void)AddEventToCalendar:(NSIndexPath *)indexPath
+{
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    
+    [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+        if(granted) {
+            
+            EKEvent *event = [EKEvent eventWithEventStore:eventStore];
+            
+            // title of the event
+            event.title = [[[self events] objectAtIndex:[indexPath row]] title];
+            
+            // star tomorrow
+            event.startDate = [[[self events] objectAtIndex:[indexPath row]] date];
+            
+            // duration = 1 h
+            event.endDate = [[[[self events] objectAtIndex:[indexPath row]] date] dateByAddingTimeInterval:90000];
+            
+            // set the calendar of the event. - here default calendar
+            [event setCalendar:[eventStore defaultCalendarForNewEvents]];
+            
+            // store the event
+            NSError *err;
+            [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
+        }
+    }];
+    
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // you need to implement this method too or nothing will work:
+    
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES; //tableview must be editable or nothing will work...
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
