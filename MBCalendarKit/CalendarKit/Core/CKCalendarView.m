@@ -1087,14 +1087,11 @@
             
             EKEvent *event = [EKEvent eventWithEventStore:eventStore];
             
-            // title of the event
             event.title = [[[self events] objectAtIndex:[indexPath row]] title];
-            
-            // star tomorrow
             event.startDate = [[[self events] objectAtIndex:[indexPath row]] date];
-            
+            event.allDay = YES;
             // duration = 1 h
-            event.endDate = [[[[self events] objectAtIndex:[indexPath row]] date] dateByAddingTimeInterval:90000];
+//            event.endDate = [[[[self events] objectAtIndex:[indexPath row]] date] dateByAddingTimeInterval:90000];
             
             // set the calendar of the event. - here default calendar
             [event setCalendar:[eventStore defaultCalendarForNewEvents]];
