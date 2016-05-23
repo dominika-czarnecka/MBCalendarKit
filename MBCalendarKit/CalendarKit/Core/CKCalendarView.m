@@ -1072,10 +1072,17 @@
     UITableViewRowAction *button2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Add" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                      {
                                          [self AddEventToCalendar:indexPath];
+                                         
+                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dodano wydarzenie do kalendarza"
+                                                                                         message: nil
+                                                                                        delegate:self
+                                                                               cancelButtonTitle:@"OK"
+                                                                               otherButtonTitles: nil];
+                                         [alert show];
                                      }];
     button2.backgroundColor = [UIColor clearColor];
     
-    return @[button, button2]; //array with all the buttons you want. 1,2,3, etc...
+    return @[button, button2];
 }
 
 - (void)AddEventToCalendar:(NSIndexPath *)indexPath
