@@ -962,7 +962,7 @@
 
 - (void)backwardTapped
 {
-    tapped = 1;
+    tapped = 2;
     NSDate *date = [self date];
     NSDate *today = [NSDate date];
     if( [self displayMode] != CKCalendarViewModeMonth) [self setDisplayMode:CKCalendarViewModeMonth];
